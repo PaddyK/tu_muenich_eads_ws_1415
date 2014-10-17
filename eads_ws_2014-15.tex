@@ -1,0 +1,157 @@
+\documentclass[10pt,a4paper,oneside]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym} % For lightning symbol
+\usepackage{fancyhdr}
+\author{Patrick Kalmbach}
+\newcommand{\pdfauthor}{Patrick Kalmbach}
+\newcommand{\matrikelnummer}{Mtrk-Nr: 03659077}
+\newcommand{\fach}{EADS}
+\newcommand{\semester}{Wintersemester 2014/2015}
+\newcommand{\doctype}{Homework 1}
+\newcommand{\finishdate}{17.10.2014}
+
+\newcommand{\contradict}{\text{\lightning}}
+
+\pagestyle{fancy}
+\setlength{\headheight}{2.5em}
+\lhead{\pdfauthor\linebreak\matrikelnummer}
+\rhead{\fach\linebreak\semester}
+\chead{\doctype\linebreak\finishdate}
+\lfoot{}
+\rfoot{}
+\cfoot{\thepage}
+
+
+\begin{document}
+\noindent
+\section{Homework 1}
+\begin{equation}\label{eq:bigo}
+O(z(n))=\lbrace h(n)\mid\exists c>0,n_{0}>0:0\leq h(n)\leq c\cdot z(n)\quad\forall n\geq n_{0}\rbrace
+\end{equation}
+\begin{equation}\label{eq:bigtheta}
+\Theta(z(n))=\lbrace h(n)\mid\exists c_{1},c_{2}>0,n_{0}>0:0\leq c_{1}\cdot z(n)\leq h(n)\leq c_{2}\cdot z(n)\ \forall n\geq n_{0}\rbrace
+\end{equation}
+\begin{equation}\label{eq:bigomega}
+\Omega(z(n))=\lbrace h(n)\mid\exists c>0,n_{0}>0:0\leq c\cdot z(n)\leq h(n)\quad\forall n\geq n_{0}\rbrace
+\end{equation}
+\begin{equation}\label{eq:smallo}
+o(z(n))=\lbrace h(n)\mid\forall c>0,\exists n_{0}>0:0\leq h(n)\leq c\cdot z(n)\quad\forall n\geq n_{0}\rbrace
+\end{equation}
+\begin{equation}\label{eq:smallomega}
+\omega(z(n))=\lbrace h(n)\mid\forall c>0,\exists n_{0}>0:0\leq c\cdot z(n)\leq h(n)\quad\forall n\geq n_{0}\rbrace
+\end{equation}
+\subsection{Question 1}
+\begin{enumerate}
+	\item From \ref{eq:bigomega} follows: \begin{align*}
+			c\cdot f(n)&\leq g(n)+f(n)\qquad\mid -f(n)	\\
+			c\cdot f(n)-f(n)&\leq g(n)					\\
+			f(n)(c-1)&\leq g(n)\qquad\qquad\quad\mid c=1			\\
+			0&\leq g(n)\quad\square
+		\end{align*}
+		
+	\item From \ref{eq:bigo} follows: \begin{align*}
+			f(n)\leq c_{1}\cdot g(n)\longrightarrow f(n)+g(n)&\leq c_{2}\cdot g(n)\qquad\qquad\quad\mid -g(n)\\
+			f(n)&\leq c_{2}\cdot g(n)-g(n)				\\
+			f(n)&\leq (c_{2}-1)g(n)\qquad\quad\mid c_{2}=c_{1}+1	\\
+			f(n)&\leq c_{1}\leq g(n)\qquad\square
+		\end{align*}
+		
+	\item From \ref{eq:bigo} follows: $g(n)\leq c_{h}\cdot h(n)$\\
+		From \ref{eq:smallo} follows: $f(n)\leq c_{g}\cdot g(n)\qquad c_{g}\in\mathbb(N)$
+		From \ref{eq:smallomega}, following must hold: $c_{f}\cdot f(n)\leq h(n)$
+		\begin{align*}
+			f(n)&\leq c_{g}\cdot g(n)\qquad g(n)\leq c_{h}\cdot h(n)\\
+			f(n)&\leq c_{g}\cdot c_{h}\cdot h(n)\qquad :c_{g}c_{h}\\
+			\frac{1}{c_{g}c_{h}}\cdot f(n)&\leq h(n)\\
+			c_{f}\cdot f(n)&\leq h(n)\qquad\square
+		\end{align*}
+		Since $c_{g}$ can be chosen arbitrarily from $\mathbb{R}$ and $c_{h}$ is constant, $c_{g}\cdot c_{h}$ can represent any number of $\mathbb{R}$. Thus the condition $\forall c\geq 0$ from \ref{eq:smallomega} can be satisfied.
+		
+		\item From $f(n)\in O(g(n))$ and \ref{eq:bigo} follows: $0\leq f(n)\leq c_{1}\cdot g(n)$\\
+		From $g(n)\in O(f(n))$ and \ref{eq:bigo} follows: $p\leq g(n)\leq c_{2}\cdot f(n)$
+		From $f(n)\in\Theta(g(n))$ and \ref{eq:bigtheta} follows: $c_{a}\cdot g(n)\leq f(n)\leq c_{b}g(n)$
+		\begin{align*}
+			0\leq g(n)\leq c_{2}f(n)\leq c_{1}g(n) &\Longleftrightarrow 0\leq c_{a}g(n)\leq f(n)\leq c_{b}g(n) \qquad\mid g(n)\leq c_{2}f(n)\\
+			0\leq g(n)\leq c_{2}f(n)\leq c_{1}c_{2}f(n) &\Longleftrightarrow 0\leq c_{a}g(n)\leq f(n)\leq c_{b}g(n)	\\
+			0\leq \frac{1}{c_{2}}g(n)\leq f(n)\leq c_{1}f(n) &\Longleftrightarrow 0\leq c_{a}g(n)\leq f(n)\leq c_{b}g(n)\qquad\square
+		\end{align*}
+\end{enumerate}
+\textbf{Part 2 of exercise one}
+
+From \ref{eq:bigomega} follows: $\forall b\in\Omega(n) : b\geq c_{1}\cdot n\longrightarrow \frac{1}{b}\leq\frac{1}{c_{1}n}\leq\frac{1}{n}\cdot c_{2}\quad\forall c_{1},c_{2}\geq 1\qquad\square$
+
+\subsection{Question 2}
+\begin{enumerate}
+	\item $\sqrt{n}$
+	\item $n$
+	\item $n\cdot log(log(n))$
+	\item $log(n!)$
+	\item $n\cdot log(n)$
+	\item $n\cdot log(n^{2})$
+	\item $n^{1+sin(n)}$
+	\item $n^{k}$
+	\item $n^{k}\cdot (log(n))^{c}$
+	\item $n^{k+\epsilon}$
+	\item $2^{n}$
+	\item $3^{n}$
+	\item $n!$
+	\item $n^{n}$
+\end{enumerate}
+
+\subsection{Question 3}
+Be $max(f(n),g(n))=max$, using \ref{eq:bigtheta}:
+\begin{align*}
+	0\leq c_{1}\cdot(f(n)+g(n)\leq & max \leq c_{2}\cdot(f(n)+g(n))\\
+	0\leq c_{1}\cdot(f(n)+g(n)\leq 2\cdot & max \leq c_{2}\cdot(f(n)+g(n))\\
+	0\leq c_{1}\cdot(f(n)+g(n)\leq & max \leq c_{2}\cdot(f(n)+g(n))\qquad \mid c_{1}\leq \frac{1}{2}, c_{2}\geq 2
+\end{align*}
+
+\subsection{Question 4}
+From $(n+a)^{b}\in\Theta(n^{b)}$ and \ref{eq:bigtheta} follows: $0\leq c_{1}n^{b}\leq (n+a)^{b}\leq c_{2}n^{b}$\\
+Choosing $c_{2}$:\\
+\begin{align*}
+c_{2}=(\mid a\mid+1)^{b}\rightarrow (n+a)^{b} &\leq (\mid a\mid+1)^{b}n^{b}\qquad\mid\sqrt[b]{ }\\
+(n+a) &\leq (\mid a\mid+1)n\\
+(n+a) &\leq n\mid a\mid+n\qquad\mid -n\\
+a &\leq n\mid a\mid
+\end{align*}
+
+Choosing $c_{1}$:
+\begin{align*}
+\text{If }a\leq 0 \text{ and } b\in \lbrace 2k+1\mid k \in \mathbb{N}_{0}\rbrace &\rightarrow 0\geq (n+a)^{b}\geq c_{1}n^{b} \\
+&\rightarrow c_{1} \leq 0 \quad\contradict \ref{eq:bigtheta}\\
+&\rightarrow a\leq 0 \rightarrow \mid a\mid < n \text{ for } b\in \lbrace 2k+1\mid k \in \mathbb{N}_{0}\rbrace\\
+\end{align*}
+
+Then $c_{1}$ is chosen as follows:
+\[c_{1} =
+  \begin{cases}
+    \frac{1}{\mid a\mid^{b}}	& : a \leq -1		\\
+    \mid a\mid 				& : -1\le a \le 1	\\
+    1 \text{ else}
+  \end{cases}
+\]
+
+$a\leq -1$:
+\begin{align*}
+\frac{1}{\mid a\mid^{b}} n^{b} 	&\leq (n-a)^{b} \qquad\mid\sqrt[b]{ }	\\
+\frac{1}{\mid a\mid} n 			&\leq n-a					\qquad\mid :n		\\
+\frac{1}{\mid a\mid} 			&\leq 1-\frac{a}{n} \qquad\square
+\end{align*}
+
+$-1\le a \le 1$:
+\begin{align*}
+\mid a\mid n^{b}		&\leq (n+a)^{b}	\qquad\mid\sqrt[b]{ }	\\
+\sqrt[b]{\mid a \mid}n 	&\leq n+a
+\sqrt[b]{\mid a \mid}	&\leq 1+\frac{a}{n}\quad\square
+\end{align*}
+
+else:
+\begin{align*}
+n^{b}\leq (n+a)^{b} \quad\square
+\end{align*}
+\end{document}
